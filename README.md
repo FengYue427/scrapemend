@@ -79,7 +79,7 @@ next step; the LLM layer is provider-agnostic by design.
 - [x] Offline, key-free test path
 - [ ] OpenAI adapter
 - [ ] Local-model adapter
-- [ ] HTML condensing for cheaper prompts
+- [x] HTML condensing for cheaper prompts
 - [ ] Pluggable cost/budget guards
 
 ## License

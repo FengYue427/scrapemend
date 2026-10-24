@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 
+from scrapewright.condense import condense
 from scrapewright.llm import LLMClient
 from scrapewright.schema import Schema
 
@@ -20,22 +21,13 @@ _SYSTEM = (
 )
 
 
-def _condense(html: str, limit: int = 6000) -> str:
-    """Trim HTML so prompts stay small and cheap.
-
-    A smarter version will strip scripts/styles and keep structural tags;
-    for the skeleton we simply cap length to bound token cost.
-    """
-    return html[:limit]
-
-
 def build_prompt(schema: Schema, html: str) -> str:
     lines = [f"- {f.name}: {f.describe}" for f in schema.fields]
     return (
         "Fields to locate:\n"
         + "\n".join(lines)
-        + "\n\nPage HTML (possibly truncated):\n"
-        + _condense(html)
+        + "\n\nPage HTML (condensed, possibly truncated):\n"
+        + condense(html)
     )
 
 
