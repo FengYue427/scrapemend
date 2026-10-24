@@ -13,8 +13,8 @@ venv/
 .ruff_cache/
 .mypy_cache/
 
-# scrapewright runtime artifacts
-.scrapewright-cache.json
+# scrapemend runtime artifacts
+.scrapemend-cache.json
 
 # Secrets — never commit API keys
 .env

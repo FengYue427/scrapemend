@@ -20,7 +20,7 @@ class SelectorCache:
     hosted cache sync is a candidate Pro feature later.)
     """
 
-    def __init__(self, path: str | Path = ".scrapewright-cache.json") -> None:
+    def __init__(self, path: str | Path = ".scrapemend-cache.json") -> None:
         self.path = Path(path)
         self._data: dict[str, dict[str, str]] = {}
         self._load()

@@ -1,11 +1,11 @@
 """Live self-healing demo using DeepSeek.
 
-Run it to watch scrapewright survive a site "redesign": the first page
+Run it to watch scrapemend survive a site "redesign": the first page
 teaches it selectors, a cached run costs nothing, then the markup changes
 and the LLM repairs the selectors automatically.
 
 Setup:
-    pip install "scrapewright[openai]"
+    pip install "scrapemend[openai]"
     set DEEPSEEK_API_KEY=sk-...        # PowerShell: $env:DEEPSEEK_API_KEY="sk-..."
     python examples/self_heal_demo.py
 
@@ -17,9 +17,9 @@ from __future__ import annotations
 
 import os
 
-from scrapewright import Schema, Scraper
-from scrapewright.cache import SelectorCache
-from scrapewright.llm import EchoClient
+from scrapemend import Schema, Scraper
+from scrapemend.cache import SelectorCache
+from scrapemend.llm import EchoClient
 
 URL = "https://shop.demo/product/42"
 
@@ -45,7 +45,7 @@ PAGE_V2 = """
 def build_client():
     """Prefer real DeepSeek healing; fall back to an offline stub."""
     if os.environ.get("DEEPSEEK_API_KEY"):
-        from scrapewright.providers.deepseek_client import DeepSeekClient
+        from scrapemend.providers.deepseek_client import DeepSeekClient
 
         print(">> Using DeepSeek for live healing.\n")
         return DeepSeekClient()

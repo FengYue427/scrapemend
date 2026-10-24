@@ -1,11 +1,11 @@
-# scrapewright
+# scrapemend
 
 **Self-healing web scraping for Python.** Describe the data you want once.
-scrapewright extracts it with cached CSS selectors — and when a site changes
+scrapemend extracts it with cached CSS selectors — and when a site changes
 its markup and those selectors break, a language model inspects the new page,
 repairs the selectors, and caches the fix. The next run is free again.
 
-> Traditional scrapers break every time a site is redesigned. scrapewright
+> Traditional scrapers break every time a site is redesigned. scrapemend
 > treats a broken selector as a cache miss, not a crash.
 
 ---
@@ -18,7 +18,7 @@ hand. Cloud "AI scraping" services solve the robustness problem but are
 expensive, send your target data through someone else's servers, and run an
 LLM call on *every* request.
 
-scrapewright takes the middle path:
+scrapemend takes the middle path:
 
 - **Cache first.** Known selectors run with zero LLM cost — it's just parsing.
 - **Heal on miss.** The LLM is only called when selectors stop matching.
@@ -27,13 +27,13 @@ scrapewright takes the middle path:
 ## Install
 
 ```bash
-pip install scrapewright
+pip install scrapemend
 ```
 
 ## Quickstart
 
 ```python
-from scrapewright import Scraper, Schema
+from scrapemend import Scraper, Schema
 
 schema = (
     Schema("product")
@@ -49,7 +49,7 @@ print("healed:", result.healed, "tokens:", result.tokens)
 ```
 
 You describe *what* you want in plain language. You never hand-write a CSS
-selector — scrapewright discovers them, and re-discovers them when they break.
+selector — scrapemend discovers them, and re-discovers them when they break.
 
 ## How it works
 

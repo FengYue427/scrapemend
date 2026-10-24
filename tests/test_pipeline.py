@@ -6,9 +6,9 @@ and no API key — the same way CI will run it.
 
 from __future__ import annotations
 
-from scrapewright import Schema, Scraper
-from scrapewright.cache import SelectorCache
-from scrapewright.llm import EchoClient
+from scrapemend import Schema, Scraper
+from scrapemend.cache import SelectorCache
+from scrapemend.llm import EchoClient
 
 PAGE_V1 = """
 <html><body>

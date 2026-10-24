@@ -1,17 +1,17 @@
 """OpenAI-backed adapter for selector healing.
 
 Implements the LLMClient protocol. The ``openai`` package is imported
-lazily so that merely importing scrapewright never requires it — only
+lazily so that merely importing scrapemend never requires it — only
 constructing an :class:`OpenAIClient` does. Install with:
 
-    pip install "scrapewright[openai]"
+    pip install "scrapemend[openai]"
 """
 
 from __future__ import annotations
 
 import os
 
-from scrapewright.llm import Usage
+from scrapemend.llm import Usage
 
 
 class OpenAIClient:
@@ -35,7 +35,7 @@ class OpenAIClient:
         except ImportError as exc:  # pragma: no cover - import guard
             raise ImportError(
                 "The OpenAI adapter needs the 'openai' package. "
-                'Install it with: pip install "scrapewright[openai]"'
+                'Install it with: pip install "scrapemend[openai]"'
             ) from exc
 
         key = api_key or os.environ.get("OPENAI_API_KEY")

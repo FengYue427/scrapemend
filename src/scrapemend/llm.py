@@ -1,7 +1,7 @@
 """The shared LLM layer.
 
 This module is deliberately generic: a provider-agnostic client plus a
-token/cost ledger. scrapewright uses it only for selector healing, but it
+token/cost ledger. scrapemend uses it only for selector healing, but it
 carries no scraping concepts, so the planned LLM-developer-tooling product
 can reuse it wholesale. Keep it free of any scraping imports.
 """

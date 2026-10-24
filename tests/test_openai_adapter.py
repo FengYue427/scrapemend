@@ -8,18 +8,18 @@ from __future__ import annotations
 
 import pytest
 
-from scrapewright.llm import LLMClient
+from scrapemend.llm import LLMClient
 
 
-def test_importing_scrapewright_does_not_require_openai():
+def test_importing_scrapemend_does_not_require_openai():
     # Core import must stay dependency-light; adapter import is separate.
-    import scrapewright  # noqa: F401
-    from scrapewright.providers import openai_client  # noqa: F401
+    import scrapemend  # noqa: F401
+    from scrapemend.providers import openai_client  # noqa: F401
 
 
 def test_missing_key_raises_before_any_call(monkeypatch):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
-    from scrapewright.providers.openai_client import OpenAIClient
+    from scrapemend.providers.openai_client import OpenAIClient
 
     with pytest.raises(ValueError, match="No API key"):
         OpenAIClient()
@@ -29,7 +29,7 @@ def test_adapter_satisfies_protocol_shape(monkeypatch):
     # With a key present, construction should wire up a usage ledger and a
     # complete() method, matching the structural LLMClient protocol.
     monkeypatch.setenv("OPENAI_API_KEY", "sk-test-not-real")
-    from scrapewright.providers.openai_client import OpenAIClient
+    from scrapemend.providers.openai_client import OpenAIClient
 
     try:
         client = OpenAIClient()

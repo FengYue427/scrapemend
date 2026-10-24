@@ -14,11 +14,11 @@ from __future__ import annotations
 import httpx
 from selectolax.lexbor import LexborHTMLParser as HTMLParser
 
-from scrapewright.cache import SelectorCache
-from scrapewright.healer import heal
-from scrapewright.llm import EchoClient, LLMClient
-from scrapewright.result import ExtractionResult
-from scrapewright.schema import Schema
+from scrapemend.cache import SelectorCache
+from scrapemend.healer import heal
+from scrapemend.llm import EchoClient, LLMClient
+from scrapemend.result import ExtractionResult
+from scrapemend.schema import Schema
 
 
 class Scraper:

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from scrapewright.condense import condense
+from scrapemend.condense import condense
 
 NOISY = """
 <html>

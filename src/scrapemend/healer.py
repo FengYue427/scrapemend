@@ -9,9 +9,9 @@ from __future__ import annotations
 
 import json
 
-from scrapewright.condense import condense
-from scrapewright.llm import LLMClient
-from scrapewright.schema import Schema
+from scrapemend.condense import condense
+from scrapemend.llm import LLMClient
+from scrapemend.schema import Schema
 
 _SYSTEM = (
     "You map data fields to CSS selectors for a web page. "

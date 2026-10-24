@@ -9,17 +9,17 @@ from __future__ import annotations
 
 import pytest
 
-from scrapewright.llm import LLMClient
+from scrapemend.llm import LLMClient
 
 
 def test_core_import_does_not_require_sdk():
-    import scrapewright  # noqa: F401
-    from scrapewright.providers import deepseek_client  # noqa: F401
+    import scrapemend  # noqa: F401
+    from scrapemend.providers import deepseek_client  # noqa: F401
 
 
 def test_missing_key_raises_before_any_call(monkeypatch):
     monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
-    from scrapewright.providers.deepseek_client import DeepSeekClient
+    from scrapemend.providers.deepseek_client import DeepSeekClient
 
     with pytest.raises(ValueError, match="No API key"):
         DeepSeekClient()
@@ -27,7 +27,7 @@ def test_missing_key_raises_before_any_call(monkeypatch):
 
 def test_defaults_point_at_deepseek(monkeypatch):
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test-not-real")
-    from scrapewright.providers.deepseek_client import (
+    from scrapemend.providers.deepseek_client import (
         DEEPSEEK_BASE_URL,
         DEEPSEEK_DEFAULT_MODEL,
         DeepSeekClient,

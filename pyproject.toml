@@ -3,13 +3,13 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "scrapewright"
+name = "scrapemend"
 version = "0.0.1"
 description = "Self-healing web scraping for Python. Describe what you want in plain language; when a site changes and your selectors break, an LLM repairs them automatically."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "OriginTown" }]
+authors = [{ name = "FengYue427" }]
 keywords = [
     "scraping",
     "web-scraping",
@@ -37,12 +37,12 @@ openai = ["openai>=1.40"]
 dev = ["pytest>=8", "ruff>=0.6"]
 
 [project.urls]
-Homepage = "https://github.com/OriginTown/scrapewright"
-Repository = "https://github.com/OriginTown/scrapewright"
-Issues = "https://github.com/OriginTown/scrapewright/issues"
+Homepage = "https://github.com/FengYue427/scrapemend"
+Repository = "https://github.com/FengYue427/scrapemend"
+Issues = "https://github.com/FengYue427/scrapemend/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/scrapewright"]
+packages = ["src/scrapemend"]
 
 [tool.ruff]
 line-length = 100

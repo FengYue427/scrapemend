@@ -9,7 +9,7 @@ DeepSeek is a strong default here: it is reachable from mainland China
 without extra setup and is cheap enough that infrequent healing calls
 are effectively free. Install the SDK with:
 
-    pip install "scrapewright[openai]"
+    pip install "scrapemend[openai]"
 
 and set DEEPSEEK_API_KEY in your environment.
 """
@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import os
 
-from scrapewright.llm import Usage
+from scrapemend.llm import Usage
 
 #: DeepSeek's OpenAI-compatible endpoint.
 DEEPSEEK_BASE_URL = "https://api.deepseek.com"
@@ -51,7 +51,7 @@ class DeepSeekClient:
         except ImportError as exc:  # pragma: no cover - import guard
             raise ImportError(
                 "The DeepSeek adapter uses the OpenAI SDK. "
-                'Install it with: pip install "scrapewright[openai]"'
+                'Install it with: pip install "scrapemend[openai]"'
             ) from exc
 
         key = api_key or os.environ.get("DEEPSEEK_API_KEY")
