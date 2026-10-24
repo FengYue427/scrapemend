@@ -67,19 +67,47 @@ extract(url, schema)
 Because healing only runs on a miss, steady-state scraping costs nothing in
 tokens. You pay the model exactly when a site actually changes.
 
+## Not just match/no-match
+
+A redesign doesn't always break a selector cleanly. Sometimes the old
+selector still *matches* but now points at the wrong node — a struck-through
+"was" price, or the first card in a "related products" rail. Every field
+matches, the cache hits, and wrong data is returned for free: the same silent
+failure you were trying to avoid.
+
+scrapemend guards against this by validating a cached extraction before
+trusting it:
+
+```python
+schema = (
+    Schema("product")
+    .add("title", "the product name", expect="nonempty")
+    .add("price", "the product price with currency", expect="number")
+)
+```
+
+If a matched value fails its `expect` check (or a single-value field suddenly
+matches several nodes), that counts as a miss and triggers healing — instead
+of silently caching garbage. `expect` takes `"number"`, `"nonempty"`, or any
+`str -> bool` callable.
+
 ## Status
 
-Early alpha (`0.0.1`). The core pipeline — cache, parse, heal, re-cache — works
-and is covered by tests that run fully offline. A real OpenAI adapter is the
-next step; the LLM layer is provider-agnostic by design.
+Early alpha (`0.0.1`). The core pipeline — cache, parse, validate, heal,
+re-cache — works and is covered by tests that run fully offline. The LLM layer
+is provider-agnostic; OpenAI and DeepSeek adapters ship today.
 
 ## Roadmap
 
 - [x] Cache-first / heal-on-miss pipeline
 - [x] Offline, key-free test path
-- [ ] OpenAI adapter
-- [ ] Local-model adapter
+- [x] OpenAI adapter
+- [x] DeepSeek adapter
 - [x] HTML condensing for cheaper prompts
+- [x] Value validation (catch "matched but wrong node")
+- [ ] Selector fingerprinting (detect drift even when a value still passes)
+- [ ] Multiple selector sets per field (survive A/B and geo variants)
+- [ ] Local-model adapter
 - [ ] Pluggable cost/budget guards
 
 ## License

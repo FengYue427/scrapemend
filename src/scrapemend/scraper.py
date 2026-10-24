@@ -19,6 +19,7 @@ from scrapemend.healer import heal
 from scrapemend.llm import EchoClient, LLMClient
 from scrapemend.result import ExtractionResult
 from scrapemend.schema import Schema
+from scrapemend.validate import field_is_plausible
 
 
 class Scraper:
@@ -48,10 +49,11 @@ class Scraper:
         selectors = self.cache.get(schema.name, url)
         if selectors is not None:
             result = self._apply(tree, schema, selectors)
-            if not result.notes:  # every field matched
+            if not result.notes:  # every field matched AND passed validation
                 result.from_cache = True
                 return result
-            # Cached selectors went stale — fall through to healing.
+            # Cached selectors went stale (missed or produced bad values) —
+            # fall through to healing.
 
         return self._heal_and_extract(url, schema, page, tree)
 
@@ -74,7 +76,10 @@ class Scraper:
         result.from_cache = False
         result.healed = True
         result.tokens = spent
-        if not any("no match" in n for n in result.notes):
+        # Only cache selectors that produced a clean extraction: every field
+        # matched, had sane cardinality, and passed validation. Caching a
+        # partial/implausible result would reintroduce silent-wrong-data.
+        if not result.notes:
             self.cache.put(schema.name, url, selectors)
         return result
 
@@ -88,8 +93,19 @@ class Scraper:
                 out.notes.append(f"{f.name}: no match")
                 out.data[f.name] = [] if f.many else None
                 continue
+
+            # Cardinality guard: a single-value field whose selector now hits
+            # several nodes is suspicious (classic "related products" drift).
+            if not f.many and len(nodes) > 1:
+                out.notes.append(f"{f.name}: expected one node, matched {len(nodes)}")
+
             values = [_read(n, f.attr) for n in nodes]
-            out.data[f.name] = values if f.many else values[0]
+            value = values if f.many else values[0]
+            out.data[f.name] = value
+
+            # Content guard: matched, but does the value look right?
+            if not field_is_plausible(f, value):
+                out.notes.append(f"{f.name}: value failed validation")
         return out
 
 
