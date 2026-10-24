@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "scrapemend"
-version = "0.0.1"
+version = "0.0.2"
 description = "Self-healing web scraping for Python. Describe what you want in plain language; when a site changes and your selectors break, an LLM repairs them automatically."
 readme = "README.md"
 requires-python = ">=3.10"

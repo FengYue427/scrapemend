@@ -93,7 +93,7 @@ of silently caching garbage. `expect` takes `"number"`, `"nonempty"`, or any
 
 ## Status
 
-Early alpha (`0.0.1`). The core pipeline — cache, parse, validate, heal,
+Early alpha (`0.0.2`). The core pipeline — cache, parse, validate, heal,
 re-cache — works and is covered by tests that run fully offline. The LLM layer
 is provider-agnostic; OpenAI and DeepSeek adapters ship today.
 

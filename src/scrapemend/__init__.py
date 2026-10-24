@@ -11,4 +11,4 @@ from scrapemend.schema import Field, Schema
 from scrapemend.scraper import Scraper
 
 __all__ = ["ExtractionResult", "Field", "Schema", "Scraper"]
-__version__ = "0.0.1"
+__version__ = "0.0.2"
